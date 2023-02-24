@@ -1,0 +1,1 @@
+Plot locked SOON-tokens by locking period
