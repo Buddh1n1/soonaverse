@@ -2,7 +2,7 @@ from iota_client import IotaClient
 import time
 import matplotlib.pyplot as plt
 
-inWeeks = False
+inWeeks = True
 
 #region statics
 client = IotaClient({'nodes': ['https://api.shimmer.network']})
@@ -18,10 +18,10 @@ output_ids = client.basic_output_ids([{"hasTimelock": True},{"hasNativeTokens": 
 soon_outputs = [o['output'] for o in client.get_outputs(output_ids) if o['output']['nativeTokens'][0]['id']==soonid]
 
 for o in soon_outputs:
-    ind = int((int(o['unlockConditions'][1]['unixTime']) - time.time()) // (24*60*60*scale))
+    ind = int(o['unlockConditions'][1]['unixTime'] - time.time()) // (24*60*60*scale)
     if ind < indices:
         expires_in[ind]+=(int(o['nativeTokens'][0]['amount'], 16))//1000000
 
 plt.bar(range(indices), expires_in)
-plt.title("soon tokens locked in days")
+plt.title(f'soon tokens locked in {"weeks" if inWeeks else "days"}')
 plt.show()
