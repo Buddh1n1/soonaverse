@@ -23,5 +23,5 @@ for o in soon_outputs:
         expires_in[ind]+=(int(o['nativeTokens'][0]['amount'], 16))//1000000
 
 plt.bar(range(indices), expires_in)
-plt.title(f'soon tokens locked in {"weeks" if in_weeks else "days"}')
+plt.title(f'SOON tokens locked in {"weeks" if in_weeks else "days"}')
 plt.show()
